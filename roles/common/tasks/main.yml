@@ -4,7 +4,6 @@
     name:
     - putty
     - googlechrome
-    - virtio-drivers
     - vscode
     state: latest
     ignore_checksums: yes

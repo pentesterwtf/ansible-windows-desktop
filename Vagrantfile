@@ -11,8 +11,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "site.yml"
     ansible.extra_vars = {
-      ansible_ssh_port: 5986,
-      ansible_connection: "winrm"
+        ansible_winrm_server_cert_validation: "ignore",
+        ansible_winrm_transport: "ntlm",
     }
   end
 end

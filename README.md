@@ -10,7 +10,6 @@
 
 * Putty
 * Google Chrome
-* VirtIO drivers
 * vscode
 
 ## Logging role
