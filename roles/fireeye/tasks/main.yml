@@ -1,6 +1,6 @@
 ---
 - name: Add Fireeye chocolatey repo
   win_chocolatey_source:
-    name: Fireeye
+    name: fireeye
     state: present
     source: https://www.myget.org/F/fireeye/api/v2

@@ -11,13 +11,14 @@
 * Putty
 * Google Chrome
 * vscode
+* sysinternals
 
-## Defender disable cloud
+### Defender disable cloud
 
 * Disables the automatic cloud submission for defender
 * Perhaps handy if you're testing :)
 
-## Logging role
+### Logging role
 
 * Sysmon
 
@@ -29,6 +30,13 @@
 * explorersuite
 * dnspy
 * ilspy
+
+
+### Fireye
+
+* Adds the chocolately repository used by fireeye's commando-vm
+* See https://github.com/fireeye/commando-vm
+
 
 ## Development
 
