@@ -8,3 +8,4 @@
     - ghidra
     - vscode
     state: latest
+    allow_prerelease: yes
