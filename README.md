@@ -2,6 +2,7 @@
 
 * Dodgy ansible script to setup my Windows 10 desktop
 * Also used for development VMs
+  * Like <https://github.com/pentesterwtf/packer-windows>
 
 ## Breakdown
 
