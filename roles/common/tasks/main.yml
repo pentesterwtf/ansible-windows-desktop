@@ -5,6 +5,7 @@
     - putty
     - googlechrome
     - vscode
+    - sysinternals
     state: latest
     ignore_checksums: yes
 
