@@ -1,0 +1,58 @@
+---
+# https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/enable-cloud-protection-windows-defender-antivirus
+# Seemingly most of the below stopped working late 2019
+
+- name: Disable cloud submission (registry)
+  win_regedit:
+    path: "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet"
+    name: SubmitSamplesConsent
+    data: 2
+    type: dword
+
+- name: Disable cloud reporting (registry)
+  win_regedit:
+    path: "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet"
+    name: SpynetReporting
+    data: 0
+    type: dword
+
+- name: Disable cloud submission (now)
+  win_shell: Set-Mppreference -SubmitSamplesConsent 2
+
+# https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=win10-ps
+- name: Disable real-time protection
+  win_shell: set-mppreference -DisableRealtimeMonitoring 1
+
+# Swapped to https://isc.sans.edu/diary/Bypassing+UAC+to+Install+a+Cryptominer/25644 - which seems to work for most cases
+- name: Disable real-time protection
+  win_shell: |
+    Set-MpPreference -DisableRealtimeMonitoring $true -ErrorAction Ignore;
+    Set-MpPreference -DisableBehaviorMonitoring $true -ErrorAction Ignore;
+    Set-MpPreference -DisableBlockAtFirstSeen $true -ErrorAction Ignore;
+    Set-MpPreference -DisableIOAVProtection $true -ErrorAction Ignore;
+    Set-MpPreference -DisablePrivacyMode $true -ErrorAction Ignore;
+    Set-MpPreference -SignatureDisableUpdateOnStartupWithoutEngine $true -ErrorAction Ignore;
+    Set-MpPreference -DisableArchiveScanning $true -ErrorAction Ignore;
+    Set-MpPreference -DisableIntrusionPreventionSystem $true -ErrorAction Ignore;
+    Set-MpPreference -DisableScriptScanning $true -ErrorAction Ignore;
+    Set-MpPreference -SubmitSamplesConsent 2 -ErrorAction Ignore;
+    Set-MpPreference -MAPSReporting 0 -ErrorAction Ignore;
+    Set-MpPreference -HighThreatDefaultAction 6 -Force -ErrorAction Ignore;
+    Set-MpPreference -ModerateThreatDefaultAction 6 -ErrorAction Ignore;
+    Set-MpPreference -LowThreatDefaultAction 6 -ErrorAction Ignore;
+    Set-MpPreference -SevereThreatDefaultAction 6 -ErrorAction Ignore;
+
+
+- name: Test AV real time protection (download EICAR)
+  win_get_url:
+    url: https://secure.eicar.org/eicar.com
+    dest: C:\\windows\\temp\\eicar.com
+
+# EICAR is a valid DOS program, but we can't run it in win10
+# Instead we'll read it to trigger the on-access scans
+- name: Test AV real time protection (Run EICAR)
+  win_stat:
+    path: C:\\windows\\temp\\eicar.com
+  register: file_info
+- debug:
+    msg: '{{ file_info }}'

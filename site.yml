@@ -2,5 +2,6 @@
 - hosts: all
   roles:
     - common
+    - defender_disable_cloud
     - logging
     - reveng

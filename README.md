@@ -12,6 +12,11 @@
 * Google Chrome
 * vscode
 
+## Defender disable cloud
+
+* Disables the automatic cloud submission for defender
+* Perhaps handy if you're testing :)
+
 ## Logging role
 
 * Sysmon
