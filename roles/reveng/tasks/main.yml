@@ -2,9 +2,11 @@
 - name: Install Apps
   win_chocolatey:
     name:
-    - putty
-    - googlechrome
-    - virtio-drivers
-    - vscode
+    - ghidra
+    - 010editor
+    - die
+    - explorersuite
+    - dnspy
+    - ilspy
     state: latest
     ignore_checksums: yes

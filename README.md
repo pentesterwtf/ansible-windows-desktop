@@ -11,12 +11,20 @@
 * Putty
 * Google Chrome
 * VirtIO drivers
-* Ghidra
 * vscode
 
 ## Logging role
 
 * Sysmon
+
+### Reveng role
+
+* Ghidra
+* 010editor
+* die
+* explorersuite
+* dnspy
+* ilspy
 
 ## Development
 
