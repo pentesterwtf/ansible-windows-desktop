@@ -1,0 +1,35 @@
+# Pipeline used for ansible-windows-desktop
+# Internal use only, shouldn't be distributed
+# This should be called from 'uglyrepo' pipeline, and will be called the 'ansible-windows-desktop' pipeline 
+steps:
+  - label: Ansible-Windows-Desktop - Validate
+    command: 
+    - cd ansible-windows-desktop && ansible-playbook --syntax-check site.yml
+    agents:
+    - "queue=uglyrepo"
+  - label: Test ansible-windows-desktop
+    command:
+    - cd ansible-windows-desktop
+    - vagrant box remove windows-10 --force || true 
+    - virsh --connect qemu:///system vol-delete /var/lib/libvirt/images/windows-10_vagrant_box_image_0.img || true
+    - vagrant box add https://minio.pentester.wtf/magiccarpet/vagrant-windows-10.box --name windows-10 --force
+    - if vagrant up; then echo "Built ok"; else echo "Build failure! see above!"; vagrant destroy -f; exit 1; fi;
+    - virsh --connect qemu:///system vol-delete /var/lib/libvirt/images/windows-10_vagrant_box_image_0.img || true
+    - vagrant destroy -f
+    timeout_in_minutes: 90
+    agents:
+    - "queue=uglyrepo"
+    retry:
+      automatic:
+        - exit_status: "*"
+          limit: 2
+  - label: Copybara export to github
+    command:
+    - java -jar copybara.jar copy.bara.sky ansible-windows-desktop --force || true
+    agents:
+    - "queue=uglyrepo"
+    branches: "master"
+    retry:
+      automatic:
+        - exit_status: "*"
+          limit: 2
