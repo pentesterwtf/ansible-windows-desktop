@@ -1,0 +1,10 @@
+---
+- name: Install Apps
+  win_chocolatey:
+    name:
+    - putty
+    - googlechrome
+    - virtio-drivers
+    - ghidra
+    - vscode
+    state: latest
