@@ -14,8 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get -y update
-          sudo apt-get install podman -y
-          sudo  python3 -m pip install "molecule[lint,podman]"
+          sudo  python3 -m pip install "molecule[lint]"
       - name: Test with molecule
         run: |
           molecule lint
