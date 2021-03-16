@@ -8,7 +8,7 @@
     dest: C:\sysmon.zip
   register: downloaded
 
-- name: Unzip a bz2 (BZip) file
+- name: Unzip a bz2 (BZip) file # noqa 503 # TODO - Make this pretty
   win_unzip:
     src: C:\sysmon.zip
     dest: C:\windows\system32\
