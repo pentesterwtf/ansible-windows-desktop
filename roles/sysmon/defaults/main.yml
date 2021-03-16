@@ -1,0 +1,3 @@
+---
+configUrl: https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml
+sysmonUrl: https://download.sysinternals.com/files/Sysmon.zip
