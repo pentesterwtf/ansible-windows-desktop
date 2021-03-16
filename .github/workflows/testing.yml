@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get -y update
-          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint]"
+          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint,vagrant]"
       - name: Test with molecule
         run: |
           molecule lint
