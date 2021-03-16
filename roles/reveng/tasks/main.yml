@@ -2,11 +2,11 @@
 - name: Install Apps
   win_chocolatey:
     name:
-    - ghidra
-    - 010editor
-    - die
-    - explorersuite
-    - dnspy
-    - ilspy
-    state: latest
+      - ghidra
+      - 010editor
+      - die
+      - explorersuite
+      - dnspy
+      - ilspy
+    state: present
     ignore_checksums: yes

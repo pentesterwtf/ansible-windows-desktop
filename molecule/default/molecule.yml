@@ -4,16 +4,16 @@ dependency:
 driver:
   name: vagrant
 platforms:
-    - name: win10-molecule
-      box: win10_1904_nosysprep
-      box_url: https://pentesterwtf.s3-ap-southeast-2.amazonaws.com/vagrant/windows-10-1904-nosysprep.box
-      groups:
-        - windows
-    - name: win2019-molecule
-      box: win2019_nosysprep
-      box_url: https://pentesterwtf.s3-ap-southeast-2.amazonaws.com/vagrant/windows_server_2019-nosysprep.box
-      groups:
-        - windows
+  - name: win10-molecule
+    box: win10_1904_nosysprep
+    box_url: https://pentesterwtf.s3-ap-southeast-2.amazonaws.com/vagrant/windows-10-1904-nosysprep.box
+    groups:
+      - windows
+  - name: win2019-molecule
+    box: win2019_nosysprep
+    box_url: https://pentesterwtf.s3-ap-southeast-2.amazonaws.com/vagrant/windows_server_2019-nosysprep.box
+    groups:
+      - windows
 provisioner:
   name: ansible
   playbooks:
@@ -29,5 +29,5 @@ verifier:
   name: ansible
 lint: |
   set -e
-  yamllint .
-  ansible-lint
+  ansible-lint roles/*
+  #yamllint . # Disabled until we get this in a better state
