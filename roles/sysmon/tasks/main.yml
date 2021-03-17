@@ -25,7 +25,7 @@
 
 - name: Get SwiftOnSecurity sysmon config
   win_get_url:
-    url: "{{ sysmonUrl }}"
+    url: "{{ configUrl }}"
     dest: C:\windows\sysmonconfig-export.xml
   register: configChange
   notify: Update Config
@@ -34,4 +34,4 @@
   win_command: powershell.exe -
   args:
     stdin: C:\windows\system32\sysmon.exe -accepteula -i C:\windows\sysmonconfig-export.xml
-  when: result.state is not defined or result.name is not defined
+  when: result.name is not defined
