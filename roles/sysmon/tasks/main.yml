@@ -18,7 +18,7 @@
 
 - name: check sysmon service
   win_service:
-    name: sysmon64
+    name: sysmon
   register: result
   failed_when: result is not defined
   ignore_errors: yes
