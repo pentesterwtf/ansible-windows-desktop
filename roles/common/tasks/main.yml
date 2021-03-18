@@ -1,15 +1,20 @@
 ---
+- name: Set high performance mode
+  win_shell: powercfg /SETACTIVE 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+  changed_when: no
+
 - name: Install Apps
   win_chocolatey:
     name:
     - putty
     - googlechrome
-    - vscode
-    - sysinternals
+    - 7zip
     state: present
     ignore_checksums: yes
 
 - name: Rice/Remove things that annoy everyone
+  tags:
+    - molecule-idempotence-notest
   win_shell: |
     Write-Output "Disabling Bing Search in Start Menu..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0

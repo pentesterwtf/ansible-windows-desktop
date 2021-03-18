@@ -8,5 +8,6 @@
       - explorersuite
       - dnspy
       - ilspy
+      - sysinternals
     state: present
     ignore_checksums: yes

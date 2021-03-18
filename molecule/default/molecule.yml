@@ -30,4 +30,4 @@ verifier:
 lint: |
   set -e
   ansible-lint roles/*
-  #yamllint . # Disabled until we get this in a better state
+  #yamllint .
