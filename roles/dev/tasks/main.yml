@@ -4,5 +4,7 @@
     name:
       - visualstudio2019community
       - vscode
+      - rust
+      - python
     state: present
     ignore_checksums: true
