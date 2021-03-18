@@ -2,7 +2,7 @@
 - name: Install apps
   win_chocolatey:
     name:
-    - visualstudio2019community
-    - vscode
+      - visualstudio2019community
+      - vscode
     state: present
-    ignore_checksums: yes
+    ignore_checksums: true

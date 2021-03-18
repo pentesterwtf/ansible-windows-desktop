@@ -10,7 +10,7 @@
 
 # https://docs.ansible.com/ansible/latest/collections/community/windows/win_unzip_module.html
 # "This module is not really idempotent, it will extract the archive every time, and report a change."
-- name: Unzip # noqa 503
+- name: Unzip  # noqa 503
   win_unzip:
     src: C:\sysmon.zip
     dest: C:\windows\system32\
@@ -21,7 +21,7 @@
     name: sysmon
   register: result
   failed_when: result is not defined
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Get SwiftOnSecurity sysmon config
   win_get_url:

@@ -10,4 +10,4 @@
       - ilspy
       - sysinternals
     state: present
-    ignore_checksums: yes
+    ignore_checksums: true

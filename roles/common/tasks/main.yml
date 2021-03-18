@@ -1,16 +1,16 @@
 ---
 - name: Set high performance mode
   win_shell: powercfg /SETACTIVE 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
-  changed_when: no
+  changed_when: false
 
 - name: Install Apps
   win_chocolatey:
     name:
-    - putty
-    - googlechrome
-    - 7zip
+      - putty
+      - googlechrome
+      - 7zip
     state: present
-    ignore_checksums: yes
+    ignore_checksums: true
 
 - name: Rice/Remove things that annoy everyone
   tags:
