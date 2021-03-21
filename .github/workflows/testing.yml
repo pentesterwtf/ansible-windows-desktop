@@ -31,6 +31,7 @@ jobs:
       - name: Install dependencies
         shell: wsl-bash {0}
         run: |
+          apt install python3 -y
           python3 -m pip install "molecule[lint]"
       - name: Run end-to-end test with molecule
         shell: wsl-bash {0}
