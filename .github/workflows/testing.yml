@@ -27,9 +27,12 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - uses: Vampire/setup-wsl@v1
       - name: Install dependencies
+        shell: wsl-bash {0}
         run: |
-          wslbash -- python3 -m pip install "molecule[lint]"
+          python3 -m pip install "molecule[lint]"
       - name: Run end-to-end test with molecule
+        shel: wsl-bash {0}
         run: |
-          wslbash -- molecule test -s github-ci
+          molecule test -s github-ci
