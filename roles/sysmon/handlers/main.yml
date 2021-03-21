@@ -1,0 +1,6 @@
+---
+- name: Update Config
+  win_command: powershell.exe -
+  args:
+    stdin: C:\windows\system32\sysmon.exe -c C:\windows\sysmonconfig-export.xml
+  when: result.state is defined and configChange.changed

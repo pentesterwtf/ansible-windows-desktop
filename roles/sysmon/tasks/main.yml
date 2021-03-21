@@ -1,0 +1,37 @@
+---
+# This is a workaround for the upstream chocolately package
+# Which isn't updated to latest hash
+
+- name: Download sysmon
+  win_get_url:
+    url: "{{ sysmonUrl }}"
+    dest: C:\sysmon.zip
+  register: downloaded
+
+# https://docs.ansible.com/ansible/latest/collections/community/windows/win_unzip_module.html
+# "This module is not really idempotent, it will extract the archive every time, and report a change."
+- name: Unzip  # noqa 503
+  win_unzip:
+    src: C:\sysmon.zip
+    dest: C:\windows\system32\
+  when: downloaded.changed
+
+- name: check sysmon service
+  win_service:
+    name: sysmon
+  register: result
+  failed_when: result is not defined
+  ignore_errors: true
+
+- name: Get SwiftOnSecurity sysmon config
+  win_get_url:
+    url: "{{ configUrl }}"
+    dest: C:\windows\sysmonconfig-export.xml
+  register: configChange
+  notify: Update Config
+
+- name: Configure sysmon (initial)
+  win_command: powershell.exe -
+  args:
+    stdin: C:\windows\system32\sysmon.exe -accepteula -i C:\windows\sysmonconfig-export.xml
+  when: result.name is not defined

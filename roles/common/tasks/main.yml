@@ -1,15 +1,20 @@
 ---
+- name: Set high performance mode
+  win_shell: powercfg /SETACTIVE 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+  changed_when: false
+
 - name: Install Apps
   win_chocolatey:
     name:
-    - putty
-    - googlechrome
-    - vscode
-    - sysinternals
-    state: latest
-    ignore_checksums: yes
+      - putty
+      - googlechrome
+      - 7zip
+    state: present
+    ignore_checksums: true
 
 - name: Rice/Remove things that annoy everyone
+  tags:
+    - molecule-idempotence-notest
   win_shell: |
     Write-Output "Disabling Bing Search in Start Menu..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
@@ -18,7 +23,6 @@
       New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -Type DWord -Value 1
-    
 
     Write-Output "Disabling Cortana..."
     If (!(Test-Path "HKCU:\Software\Microsoft\Personalization\Settings")) {
@@ -44,7 +48,7 @@
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
 
     Write-Output "Hiding Task View button..."
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0    
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
     Write-Output "Showing small icons in taskbar..."
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarSmallIcons" -Type DWord -Value 1
     Write-Output "Hiding People icon..."
@@ -99,3 +103,11 @@
       New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Type DWord -Value 1
+
+- name: Disable screensaver for vagrant user
+  tags:
+    - molecule-idempotence-notest
+  win_shell: |
+    Set-ItemProperty "HKCU:\Control Panel\Desktop" -Name ScreenSaveActive -Value 0 -Type DWord
+    powercfg -x -monitor-timeout-ac 0
+    powercfg -x -monitor-timeout-dc 0
