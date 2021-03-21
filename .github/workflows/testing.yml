@@ -29,7 +29,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          python3 -m pip install "molecule[lint]"
-      - name: Lint with Molecule
+          wslbash -- python3 -m pip install "molecule[lint]"
+      - name: Run end-to-end test with molecule
         run: |
-          molecule test -s github-ci
+          wslbash -- molecule test -s github-ci
