@@ -33,6 +33,7 @@ jobs:
           apt install python3 python3-pip -y
           python3 -m pip install "molecule[lint]"
           ansible-galaxy collection install ansible.windows
+          ansible-galaxy collection install community.windows
           ansible-galaxy collection install chocolatey.chocolatey
       - name: Run end-to-end test with molecule
         shell: wsl-bash {0}
