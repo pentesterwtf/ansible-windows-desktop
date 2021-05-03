@@ -9,6 +9,8 @@ driver:
       ansible_connection: winrm
 platforms:
   - name: instance
+  groups:
+  - windows
 provisioner:
   name: ansible
   playbooks:
