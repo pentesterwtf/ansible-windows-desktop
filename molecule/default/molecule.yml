@@ -20,7 +20,7 @@ provisioner:
       windows:
         ansible_become: false
         ansible_user: vagrant
-        ansible_password: vagrant
+        ansible_password: Vagrant123$
         ansible_shell_type: cmd
 verifier:
   name: ansible
