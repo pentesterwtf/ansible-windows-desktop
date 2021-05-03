@@ -6,7 +6,7 @@ driver:
   options:
     managed: False
     ansible_connection_options:
-      ansible_connection: local
+      ansible_connection: winrm
 platforms:
   - name: instance
 provisioner:
