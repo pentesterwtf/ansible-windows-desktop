@@ -30,7 +30,7 @@ jobs:
       - name: Install/Enable Winrm
         shell: powershell
         run: |
-          IEX (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Upgrade-PowerShell.ps1")
+          IEX (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1")
           net user /add vagrant Vagrant123!
           net localgroup administrators vagrant /add
       - name: Install dependencies
