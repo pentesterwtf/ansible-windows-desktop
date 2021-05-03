@@ -9,5 +9,8 @@
       - dnspy
       - ilspy
       - sysinternals
+      - fiddler
+      - x64dbg
+      - ida-free
     state: present
     ignore_checksums: true
