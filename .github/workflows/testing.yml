@@ -14,8 +14,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get -y update
-          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule[lint]"
-          sudo ANSIBLE_SKIP_CONFLICT_CHECK=1 python3 -m pip install "molecule-vagrant"
+          sudo apt-get install podman -y
+          sudo apt-get remove ansible -y
+          sudo python3 -m pip install "molecule[lint,ansible,ansible-base,vagrant]"
       - name: Lint with Molecule
         run: |
           molecule lint
