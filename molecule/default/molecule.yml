@@ -2,18 +2,15 @@
 dependency:
   name: galaxy
 driver:
-  name: vagrant
+  name: delegated
+  options:
+    managed: False
+    ansible_connection_options:
+      ansible_connection: local
 platforms:
-  - name: win10-molecule
-    box: win10_1904_nosysprep
-    box_url: https://pentesterwtf.s3-ap-southeast-2.amazonaws.com/vagrant/windows-10-1904-nosysprep.box
+  - name: instance
     groups:
-      - windows
-  - name: win2019-molecule
-    box: win2019_nosysprep
-    box_url: https://pentesterwtf.s3-ap-southeast-2.amazonaws.com/vagrant/windows_server_2019-nosysprep.box
-    groups:
-      - windows
+    - windows
 provisioner:
   name: ansible
   playbooks:
@@ -23,11 +20,8 @@ provisioner:
       windows:
         ansible_become: false
         ansible_user: vagrant
-        ansible_password: vagrant
+        ansible_password: Vagrant123!
         ansible_shell_type: cmd
+        ansible_remote_tmp: C:/
 verifier:
   name: ansible
-lint: |
-  set -e
-  ansible-lint roles/*
-  #yamllint .
