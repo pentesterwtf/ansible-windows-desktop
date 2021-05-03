@@ -39,4 +39,4 @@ jobs:
       - name: Run end-to-end test with molecule
         shell: wsl-bash {0}
         run: |
-          molecule test -s github-ci
+          molecule test
