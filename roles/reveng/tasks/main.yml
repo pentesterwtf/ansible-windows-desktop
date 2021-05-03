@@ -1,4 +1,9 @@
 ---
+- name: Add Fireeye chocolatey repo
+  win_chocolatey_source:
+    name: fireeye
+    state: present
+    source: https://www.myget.org/F/fireeye/api/v2
 - name: Install Apps
   win_chocolatey:
     name:
@@ -12,5 +17,8 @@
       - fiddler
       - x64dbg
       - ida-free
+      - radare2
+      - openjdk
+      - microsoft-build-tools
     state: present
     ignore_checksums: true
