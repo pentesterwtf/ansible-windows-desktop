@@ -28,9 +28,9 @@ jobs:
         with:
           distribution: Ubuntu-20.04
       - name: Install/Enable Winrm
-        shell: pwsh
+        shell: powershell
         run: |
-          IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Upgrade-PowerShell.ps1')
+          IEX (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Upgrade-PowerShell.ps1")
           net user /add vagrant Vagrant123!
           net localgroup administrators vagrant /add
       - name: Install dependencies
