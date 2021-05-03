@@ -20,24 +20,3 @@ jobs:
       - name: Lint with Molecule
         run: |
           molecule lint
-  end-to-end:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: Vampire/setup-wsl@v1
-        with:
-          distribution: Ubuntu-20.04
-      - name: Install dependencies
-        shell: wsl-bash {0}
-        run: |
-          apt-get update -y
-          apt install python3 python3-pip -y
-          python3 -m pip install "molecule[lint,ansible,ansible-base]"
-          python3 -m pip install "pywinrm"
-          ansible-galaxy collection install ansible.windows
-          ansible-galaxy collection install community.windows
-          ansible-galaxy collection install chocolatey.chocolatey
-      - name: Run end-to-end test with molecule
-        shell: wsl-bash {0}
-        run: |
-          molecule test
