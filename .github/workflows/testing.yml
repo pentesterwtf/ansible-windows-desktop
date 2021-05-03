@@ -31,7 +31,7 @@ jobs:
         shell: pwsh
         run: |
           iex https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Upgrade-PowerShell.ps1
-          net user /add vagrant Vagrant123$
+          net user /add vagrant Vagrant123!
           net localgroup administrators vagrant /add
       - name: Install dependencies
         shell: wsl-bash {0}
