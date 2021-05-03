@@ -21,7 +21,7 @@ provisioner:
         ansible_become: false
         ansible_user: vagrant
         ansible_password: Vagrant123!
-        ansible_shell_type: powershell
+        ansible_shell_type: cmd
         ansible_remote_tmp: C:/
 verifier:
   name: ansible
