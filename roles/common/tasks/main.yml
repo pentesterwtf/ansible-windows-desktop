@@ -103,3 +103,11 @@
       New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Type DWord -Value 1
+
+- name: Disable screensaver for vagrant user
+  tags:
+    - molecule-idempotence-notest
+  win_shell: |
+    Set-ItemProperty "HKCU:\Control Panel\Desktop" -Name ScreenSaveActive -Value 0 -Type DWord
+    powercfg -x -monitor-timeout-ac 0
+    powercfg -x -monitor-timeout-dc 0

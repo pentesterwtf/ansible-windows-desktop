@@ -17,7 +17,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../../site.yml
+    converge: ../../playbook.yml
   inventory:
     group_vars:
       windows:
