@@ -32,7 +32,7 @@ jobs:
         run: |
           apt-get update -y
           apt install python3 python3-pip -y
-          python3 -m pip install "molecule[lint]"
+          python3 -m pip install "molecule[lint,ansible,ansible-base]"
           ansible-galaxy collection install ansible.windows
           ansible-galaxy collection install community.windows
           ansible-galaxy collection install chocolatey.chocolatey
