@@ -20,5 +20,6 @@
       - radare2
       - openjdk
       - microsoft-build-tools
+      - pe-bear
     state: present
     ignore_checksums: true
